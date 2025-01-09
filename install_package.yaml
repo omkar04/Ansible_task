@@ -1,0 +1,13 @@
+- name: Install packages
+  hosts: all
+  become: yes
+  vars:
+    packages:
+      - git
+      - vim
+      - wget
+  tasks:
+    - name: Install packages
+      apt:
+        name: "{{ packages }}"
+        state: present

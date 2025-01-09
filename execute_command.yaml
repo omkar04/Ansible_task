@@ -1,0 +1,10 @@
+- name: Execute a shell command
+  hosts: webservers
+  tasks:
+    - name: check disk space
+      shell: df / | grep "/" | awk '{print $5}' | sed 's/%//g'
+      register: disk_space_output
+
+    - name: Display disk space
+      debug:
+         msg: "Disk space usage: {{ disk_space_output.stdout | trim }}"
