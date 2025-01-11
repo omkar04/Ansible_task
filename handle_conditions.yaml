@@ -1,0 +1,23 @@
+---
+- name: Handle conditions
+  hosts: all
+  become: yes
+  vars:
+    users: oshinde
+  tasks:
+    - name: Get the user ID
+      command: id -u
+      register: user_id
+
+    - name: Display user ID
+      debug:
+        msg: "The user ID is {{ user_id.stdout }}"  
+
+    - name: condifiton if user exists
+      debug:
+        msg: "USerexists!"
+      when: user_id.stdout == "0"
+    - name: check the var
+      debug: 
+        msg: " users is comapared"
+      when: users == "oshinde"

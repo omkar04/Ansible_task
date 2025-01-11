@@ -1,0 +1,17 @@
+---
+- name: Ensure Python is installed
+  hosts: all
+  become: yes
+  tasks:
+  - name: Install Python
+    apt:
+        name: python3
+        state: present
+
+  - name: Check Python version
+    command: python3 --version
+    register: python_version
+
+  - name: Print Python version
+    debug:
+        msg: "Python version is {{ python_version.stdout }}"

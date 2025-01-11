@@ -1,0 +1,13 @@
+---
+- name: Create Directory
+  hosts: webservers
+  become: yes
+  tasks:
+    - name: Create new dir
+      file:
+        path: /mnt/e/Task_01/backup_01/{{ item }}
+        state: directory
+        mode: '0755'
+      loop:
+        - html
+        - css
