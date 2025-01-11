@@ -1,0 +1,17 @@
+---
+- name: Using Handlers
+  hosts: webservers
+  become: yes
+  tasks: 
+    - name: copy file    
+      copy:
+        src: /mnt/e/Task_01/backup_01/app.txt
+        dest: /mnt/e/Task_01/backup_02/app.txt
+        mode: "0644"
+      notify: 
+        - Restart services
+
+  handlers:
+    - name: Restart services
+      debug: 
+       msg: "service restarted"

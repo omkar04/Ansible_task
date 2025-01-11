@@ -1,0 +1,10 @@
+---
+- name: Remove temp files
+  hosts: webservers
+  become: yes
+  tasks:
+    - name: Remove file from /tmp
+      file:
+       path: /tmp/*
+       state: absent
+       

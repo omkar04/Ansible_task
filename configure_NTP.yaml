@@ -1,0 +1,16 @@
+---
+- name: Configure NTP (Network Time Protocol)
+  hosts: webservers
+  become: yes
+  tasks:
+    - name: Install NTP
+      apt:
+        name: ntp
+        state: present
+    
+    - name: Start and Enable NTP
+      service:
+        name: ntp
+        state: started
+        enabled: yes
+

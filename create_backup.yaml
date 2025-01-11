@@ -1,0 +1,22 @@
+---
+- name: Create backup and modify host file
+  hosts: webservers
+  become: yes
+  tasks:
+    - name: Ensure destination directory exists
+      file:
+        path: /mnt/e/Task_01/backup_01/
+        state: directory
+        mode: "0755"
+
+    - name: Backup hosts file
+      copy:
+        src: /mnt/e/Task_01/backup_02/app.txt
+        dest: /mnt/e/Task_01/backup_01/app.txt
+        remote_src: yes
+        backup: yes
+
+    - name: Modify host file
+      lineinfile:
+        path: /mnt/e/Task_01/backup_02/app.txt
+        line: "192.168.1.10 myserver"

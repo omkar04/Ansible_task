@@ -1,0 +1,26 @@
+---
+- name: Loop through Users
+  hosts: webservers
+  become: yes
+  vars:
+    users:
+      - dev1
+      - dev2
+      - dev3
+    posts:
+      - manager
+      - Analyst
+  tasks:
+    - name: print the variables'
+      debug:
+        var: users
+      
+    - name: Print each user individually
+      debug:
+        msg: "Users  {{ item }}"
+      loop: "{{users}}"
+
+    - name: print posts
+      debug:
+        msg: "Posts {{item}}"
+      loop: "{{posts}}"
